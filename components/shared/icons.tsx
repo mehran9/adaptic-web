@@ -7,11 +7,13 @@ import {
   ChevronRight,
   Copy,
   CreditCard,
+  Figma,
   File,
   FileText,
   HelpCircle,
   Image,
   Laptop,
+  Link,
   Loader2,
   LucideIcon,
   LucideProps,
@@ -21,8 +23,10 @@ import {
   Puzzle,
   Search,
   Settings,
+  Sparkles,
   SunMedium,
   Trash,
+  Upload,
   User,
   X,
 } from "lucide-react";
@@ -39,6 +43,7 @@ export const Icons = {
   check: Check,
   close: X,
   copy: Copy,
+  figma: Figma,
   ellipsis: MoreVertical,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
@@ -76,7 +81,64 @@ export const Icons = {
   ),
   help: HelpCircle,
   laptop: Laptop,
-  logo: Puzzle,
+  link: Link,
+  upload: Upload,
+  puzzle: Puzzle,
+  sparkles: Sparkles,
+  logo: ({ ...props }: LucideProps) => (
+    <svg
+      className="text-brand-700 m-1 size-6"
+      aria-hidden="true"
+      focusable="false"
+      data-prefix="fab"
+      data-icon="github"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 30 30"
+      {...props}
+    >
+      {" "}
+      <circle cx="24.1932" cy="5.80645" r="5.80645" fill="currentColor" />
+      <rect
+        x="2.90234"
+        width="11.6129"
+        height="11.6129"
+        rx="2"
+        fill="currentColor"
+      />
+      <path
+        d="M6.87591 16.0161C7.26081 15.3494 8.22306 15.3494 8.60796 16.0161L13.5806 24.629C13.9655 25.2957 13.4844 26.129 12.7146 26.129H2.76927C1.99947 26.129 1.51835 25.2957 1.90325 24.629L6.87591 16.0161Z"
+        fill="currentColor"
+      />
+      <line
+        x1="19.3867"
+        y1="17.3872"
+        x2="28.9996"
+        y2="17.3872"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <line
+        x1="19.3867"
+        y1="21.2583"
+        x2="28.9996"
+        y2="21.2583"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <line
+        x1="19.3867"
+        y1="25.1289"
+        x2="28.9996"
+        y2="25.1289"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
   media: Image,
   moon: Moon,
   page: File,

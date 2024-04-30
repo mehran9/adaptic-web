@@ -4,16 +4,16 @@ import { env } from "@/env.mjs";
 const site_url = env.NEXT_PUBLIC_APP_URL;
 
 export const siteConfig: SiteConfig = {
-  name: "SaaS Starter",
+  name: "Collabur",
   description:
-    "Get your project off to an explosive start with SaaS Starter! Harness the power of Next.js 14, Prisma, Neon, Auth.js v5, Resend, React Email, Shadcn/ui and Stripe to build your next big thing.",
+    "Empower your teams to create and publish web apps effortlessly, using bespoke, AI-generated design systems, generative-UI, and no-code tooling.",
   url: site_url,
   ogImage: `${site_url}/og.jpg`,
   links: {
-    twitter: "https://twitter.com/miickasmt",
-    github: "https://github.com/mickasmt/next-saas-stripe-starter",
+    twitter: "https://twitter.com/collabur",
+    github: "https://github.com/collabur",
   },
-  mailSupport: "support@saas-starter.com",
+  mailSupport: "support@collabur.com",
 };
 
 export const footerLinks: SidebarNavItem[] = [
@@ -29,19 +29,21 @@ export const footerLinks: SidebarNavItem[] = [
   {
     title: "Product",
     items: [
-      { title: "Security", href: "#" },
-      { title: "Customization", href: "#" },
-      { title: "Customers", href: "#" },
-      { title: "Changelog", href: "#" },
+      { title: "Design Systems", href: "#" },
+      { title: "Generative UI", href: "#" },
+      { title: "No Code Editor", href: "#" },
+      { title: "Case Studies", href: "#" },
+      { title: "Roadmap", href: "#" },
     ],
   },
   {
     title: "Docs",
     items: [
-      { title: "Introduction", href: "#" },
-      { title: "Installation", href: "#" },
-      { title: "Components", href: "#" },
-      { title: "Code Blocks", href: "#" },
+      { title: "Getting started", href: "#" },
+      { title: "Consuming DS Components", href: "#" },
+      { title: "DS Management", href: "#" },
+      { title: "Deploying apps", href: "#" },
+      { title: "API Reference", href: "#" },
     ],
   },
 ];

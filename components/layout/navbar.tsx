@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import useScroll from "@/hooks/use-scroll";
 import { useSigninModal } from "@/hooks/use-signin-modal";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ModeToggle } from "@/components/layout/mode-toggle";
 
 import { Icons } from "../shared/icons";
 import { MainNav } from "./main-nav";
@@ -49,7 +50,6 @@ export function NavBar({
               className={cn(
                 buttonVariants({
                   variant: "outline",
-                  rounded: "full",
                 }),
                 "px-4",
               )}
@@ -59,18 +59,23 @@ export function NavBar({
           ) : null} */}
 
           {user ? (
-            <UserAccountNav user={user} />
+            <div className="flex items-center space-x-3">
+              <ModeToggle />
+              <UserAccountNav user={user} />
+            </div>
           ) : (
-            <Button
-              className="gap-2 px-4"
-              variant="default"
-              size="sm"
-              rounded="full"
-              onClick={signInModal.onOpen}
-            >
-              <span>Sign In</span>
-              <Icons.arrowRight className="size-4" />
-            </Button>
+            <div className="flex items-center space-x-3">
+              <ModeToggle />
+              <Button
+                className="gap-2 px-4"
+                variant="default"
+                size="sm"
+                onClick={signInModal.onOpen}
+              >
+                <span>Sign In</span>
+                <Icons.arrowRight className="size-4" />
+              </Button>
+            </div>
           )}
         </div>
       </div>

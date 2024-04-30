@@ -22,7 +22,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
                 <li key={link.title}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary"
+                    className="hover:text-brand-700 text-sm text-muted-foreground"
                   >
                     {link.title}
                   </Link>

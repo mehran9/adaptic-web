@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { UserSubscriptionPlan } from "@/types";
 
@@ -21,8 +21,21 @@ interface PricingCardsProps {
 }
 
 export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
+  useEffect(() => {
+    const cardToCenter = document.querySelector(".card-to-center");
+    if (cardToCenter) {
+      cardToCenter.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }
+  }, []);
+
   const isYearlyDefault =
-    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year" ? true : false;
+    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year"
+      ? true
+      : false;
   const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
   const signInModal = useSigninModal();
 
@@ -34,17 +47,23 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
     return (
       <div
         className={cn(
-          "relative flex flex-col overflow-hidden rounded-3xl border shadow-sm",
-          offer.title.toLocaleLowerCase() === "pro"
-            ? "-m-0.5 border-2 border-purple-400"
+          "relative flex min-w-[340px] max-w-[90hw] flex-col overflow-hidden rounded-3xl border shadow-sm",
+          offer.title.toLocaleLowerCase() === "startup team"
+            ? "card-to-center border-brand-500 -m-0.5 border-2"
             : "",
         )}
         key={offer.title}
       >
         <div className="min-h-[150px] items-start space-y-4 bg-muted/50 p-6">
-          <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
-            {offer.title}
-          </p>
+          <div className="space-y-2">
+            <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
+              {offer.title}
+            </p>
+
+            <p className="text-brand-700 text-left text-sm font-medium">
+              {offer.description}
+            </p>
+          </div>
 
           <div className="flex flex-row">
             <div className="flex items-end">
@@ -54,7 +73,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                     <span className="mr-2 text-muted-foreground/80 line-through">
                       ${offer.prices.monthly}
                     </span>
-                    <span>${offer.prices.yearly / 12}</span>
+                    <span>${(offer.prices.yearly / 12).toFixed(2)}</span>
                   </>
                 ) : (
                   `$${offer.prices.monthly}`
@@ -78,7 +97,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
           <ul className="space-y-2 text-left text-sm font-medium leading-normal">
             {offer.benefits.map((feature) => (
               <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-purple-500" />
+                <Icons.check className="text-brand-600 size-5 shrink-0" />
                 <p>{feature}</p>
               </li>
             ))}
@@ -102,7 +121,6 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                 className={cn(
                   buttonVariants({
                     variant: "outline",
-                    rounded: "full",
                   }),
                   "w-full",
                 )}
@@ -119,14 +137,13 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
           ) : (
             <Button
               variant={
-                offer.title.toLocaleLowerCase() === "pro"
+                offer.title.toLocaleLowerCase() === "startup team"
                   ? "default"
                   : "outline"
               }
-              rounded="full"
               onClick={signInModal.onOpen}
             >
-              Sign in
+              Sign in to subscribe
             </Button>
           )}
         </div>
@@ -136,7 +153,10 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
 
   return (
     <section className="container flex flex-col items-center text-center">
-      <HeaderSection label="Pricing" title="Start at full speed !" />
+      <HeaderSection
+        label="Pricing"
+        title="Start building the new internet today, with Collabur."
+      />
 
       <div className="mb-4 mt-10 flex items-center gap-5">
         <ToggleGroup
@@ -149,14 +169,14 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
         >
           <ToggleGroupItem
             value="yearly"
-            className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+            className="data-[state=on]:!bg-brand-700 rounded-full px-5 data-[state=on]:!text-primary-foreground"
             aria-label="Toggle yearly billing"
           >
             Yearly (-20%)
           </ToggleGroupItem>
           <ToggleGroupItem
             value="monthly"
-            className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+            className="data-[state=on]:!bg-brand-700 rounded-full px-5 data-[state=on]:!text-primary-foreground"
             aria-label="Toggle monthly billing"
           >
             Monthly
@@ -164,16 +184,18 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
         </ToggleGroup>
       </div>
 
-      <div className="mx-auto grid max-w-6xl gap-5 bg-inherit py-5 md:grid-cols-3 lg:grid-cols-3">
-        {pricingData.map((offer) => (
-          <PricingCard offer={offer} key={offer.title} />
-        ))}
+      <div className="w-full overflow-x-auto bg-inherit md:mx-auto">
+        <div className="flex gap-5 overflow-x-auto py-5 md:mx-auto">
+          {pricingData.map((offer) => (
+            <PricingCard offer={offer} key={offer.title} />
+          ))}
+        </div>
       </div>
 
       <p className="mt-3 text-balance text-center text-base text-muted-foreground">
         Email{" "}
         <a
-          className="font-medium text-primary hover:underline"
+          className="text-brand-700 font-medium hover:underline"
           href="mailto:support@saas-starter.com"
         >
           support@saas-starter.com

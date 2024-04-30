@@ -1,10 +1,15 @@
+import { Prompt } from "next/font/google";
 import Link from "next/link";
 
 import { env } from "@/env.mjs";
 import { siteConfig } from "@/config/site";
 import { cn, nFormatter } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Icons } from "@/components/shared/icons";
+
+import { PromptInput } from "../chat/promptInput";
+import { Button } from "../ui/button";
 
 export async function HeroLanding() {
   const { stargazers_count: stars } = await fetch(
@@ -28,66 +33,58 @@ export async function HeroLanding() {
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
         {/* Want animations? Check here: https://github.com/mickasmt/next-saas-stripe-starter/blob/76eb9f2b70b29c7a734ff0e5b047796ed2dac28d/app/(marketing)/page.tsx */}
         <Link
-          href="https://twitter.com/miickasmt/status/1719892161095745801"
+          href="#"
           className={cn(
-            buttonVariants({ variant: "outline", size: "sm", rounded: "full" }),
+            buttonVariants({ variant: "outline", size: "sm" }),
             "px-4",
           )}
           target="_blank"
         >
-          <span className="mr-3">🎉</span> Introducing on{" "}
-          <Icons.twitter className="ml-2 size-3.5" />
+          <span className="mr-3">🎉</span> We are hiring and expanding fast!
         </Link>
 
         <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
-          Kick off with a bang with{" "}
-          <span className="text-gradient_indigo-purple font-extrabold">
-            SaaS Starter
+          Help your teams create at the speed of thought with{" "}
+          <span className="text-gradient_brand-purple font-extrabold">
+            {siteConfig.name}
           </span>
+          <span className="ml-3">✨</span>
         </h1>
 
         <p
-          className="max-w-2xl text-balance leading-normal text-muted-foreground sm:text-xl sm:leading-8"
+          className="max-w-5xl text-balance leading-normal text-muted-foreground sm:text-xl sm:leading-8"
           style={{ animationDelay: "0.35s", animationFillMode: "forwards" }}
         >
-          Build your next project using Next.js 14, Prisma, Neon, Auth.js
-          v5, Resend, React Email, Shadcn/ui, Stripe.
+          Unleash creativity & innovation across your organization with
+          AI-powered design systems and no-code tooling, by empowering everyone
+          to effortlessly craft and publish stunning, consistent web
+          experiences.
         </p>
 
         <div
-          className="flex justify-center space-x-2 md:space-x-4"
+          className="mt-6 flex w-full flex-col items-center space-y-8 sm:mt-12"
           style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
         >
-          <Link
-            href="/pricing"
-            prefetch={true}
-            className={cn(
-              buttonVariants({ size: "lg", rounded: "full" }),
-              "gap-2",
-            )}
-          >
-            <span>Go Pricing</span>
-            <Icons.arrowRight className="size-4" />
-          </Link>
-          <Link
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noreferrer"
-            className={cn(
-              buttonVariants({
-                variant: "outline",
-                size: "lg",
-                rounded: "full",
-              }),
-              "px-5",
-            )}
-          >
-            <Icons.gitHub className="mr-2 size-4" />
-            <p>
-              <span className="hidden sm:inline-block">Star on</span> GitHub{" "}
-              <span className="font-semibold">{nFormatter(stars)}</span>
-            </p>
-          </Link>
+          <h3 className="text-gradient_brand-purple font-heading text-2xl font-black tracking-tight lg:text-3xl">
+            Take Collabur for a spin!
+          </h3>
+          <Tabs defaultValue="generate-ds" className="w-full lg:w-[800px]">
+            <TabsList>
+              <TabsTrigger value="generate-ds">Generate a DS</TabsTrigger>
+              <TabsTrigger value="generate-project">
+                Generate a project
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="generate-ds">
+              <PromptInput placeholder="Describe your company, industry, customers, and digital projects. Include brand tone, and style preferences..." />
+            </TabsContent>
+            <TabsContent value="generate-project">
+              <PromptInput
+                type="project"
+                placeholder="Describe your website, layout, or component..."
+              />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </section>

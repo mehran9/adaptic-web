@@ -33,6 +33,18 @@
     --ring: 0 0% 3.9%;
 
     --radius: 0.5rem;
+
+    --brand-50: 223 100% 97%;
+    --brand-100: 221 100% 95%;
+    --brand-200: 223 100% 90%;
+    --brand-300: 223 100% 85%;
+    --brand-400: 223 100% 79%;
+    --brand-500: 222 100% 74%;
+    --brand-600: 222 100% 69%;
+    --brand-700: 223 100% 64%;
+    --brand-800: 223 100% 21%;
+    --brand-900: 249 59% 47%;
+    --brand-950: 222 100% 11%;
   }
 
   .dark {
@@ -63,6 +75,18 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
+
+    --brand-50: 223 100% 97%;
+    --brand-100: 221 100% 95%;
+    --brand-200: 223 100% 90%;
+    --brand-300: 223 100% 85%;
+    --brand-400: 223 100% 79%;
+    --brand-500: 222 100% 74%;
+    --brand-600: 222 100% 69%;
+    --brand-700: 223 100% 64%;
+    --brand-800: 223 100% 21%;
+    --brand-900: 249 59% 47%;
+    --brand-950: 222 100% 11%;
   }
 }
 
@@ -73,7 +97,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 
@@ -83,14 +109,18 @@
   }
 
   .step:before {
-    @apply absolute w-9 h-9 bg-muted rounded-full font-mono font-medium text-center text-base inline-flex items-center justify-center -indent-px border-4 border-background;
+    @apply absolute inline-flex h-9 w-9 items-center justify-center rounded-full border-4 border-background bg-muted text-center -indent-px font-mono text-base font-medium;
     @apply ml-[-50px] mt-[-4px];
     content: counter(step);
   }
 }
 
-.text-gradient_indigo-purple {
-  background: linear-gradient(90deg, #6366f1 0%, rgb(168 85 247 / 0.8) 100%);
+.text-gradient_brand-purple {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--brand-700)) 0%,
+    hsl(var(--brand-400)) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
